@@ -2,226 +2,168 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>StreamPlus - Gerador de Wallpaper</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador de Wallpapers</title>
   <style>
-    body { margin: 0; font-family: sans-serif; background-color: #000; color: white; text-align: center; }
-    
-    .splash {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: linear-gradient(160deg, #1a1a1a, #333);
-      display: flex; flex-direction: column; justify-content: center; align-items: center;
-      z-index: 9999;
-    }
-    .splash h1 { font-size: 2em; margin: 0.5em 0; }
-    .splash p { font-size: 1em; }
-
-    .container {
-      width: 90%;
-      max-width: 1080px;
-      margin: 20px auto;
-      display: none;
-      flex-direction: column;
-      align-items: center;
-    }
-    
-    select, input {
-      margin: 5px;
-      padding: 5px;
-    }
-    
-    button {
-      padding: 10px 20px;
-      margin: 10px;
-      cursor: pointer;
-    }
-    
-    .player-container {
-      padding-top: 56.25%;
-      position: relative;
-      display: none;
-      margin-top: 20px;
-    }
-    
-    iframe {
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      border: none;
-    }
-    
-    .wallpaper {
-      width: 1080px;
-      height: 1350px;
-      display: flex;
-      flex-direction: column;
-      background: linear-gradient(to bottom, red, white);
-      position: relative;
-      margin-top: 20px;
-      border: 2px solid #fff;
-    }
-    
-    .setor {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid rgba(255,255,255,0.1);
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .saudacao { font-size: 2em; text-align: center; }
-    .imagem-time { max-width: 65%; max-height: 65%; z-index: 1; }
-    .autor { font-size: 1.5em; text-align: center; }
-    .rodape { font-size: 1em; text-align: center; }
-    
-    .rodape img { width: 50px; vertical-align: middle; }
+    body { font-family: sans-serif; padding: 20px; max-width: 800px; margin: auto; }
+    label { display: block; margin-top: 10px; }
+    select, input, textarea, button { width: 100%; margin-top: 5px; padding: 8px; }
+    img { max-width: 100%; margin-top: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    .historico { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 10px; }
+    .historico img { width: 100px; height: auto; cursor: pointer; }
+    .compartilhar { margin-top: 10px; }
   </style>
 </head>
-
 <body>
 
-<div class="splash" id="splash">
-  <h1>Bem-vindo, Cliente: STREAMPLUS</h1>
-  <p>Validade da assinatura: 10/06/2025</p>
-</div>
+<h1>Gerador de Wallpapers</h1>
 
-<div class="container" id="generatorContainer">
-
-  <h1>Gerador de Wallpaper</h1>
-
-  <label>Cor de Fundo:</label>
-  <select id="corFundo">
-    <option value="red">Vermelho</option>
-    <option value="blue">Azul</option>
-    <option value="black">Preto</option>
-    <option value="green">Verde</option>
-    <option value="yellow">Amarelo</option>
+<label>Estilo Artístico:
+  <select id="estilo">
+    <option>realista</option>
+    <option>cartoon</option>
+    <option>futurista</option>
+    <option>surreal</option>
   </select>
+</label>
 
-  <label>Saudação:</label>
-  <select id="saudacao">
-    <option>Bom dia</option>
-    <option>Boa tarde</option>
-    <option>Boa noite</option>
-    <option>Perdeu de Novo!</option>
-    <option>Olha a Segunda Divisão!</option>
-    <option>Freguesia Pura!</option>
+<label>Tema Principal:
+  <input id="tema" placeholder="Ex.: Floresta mágica">
+</label>
+
+<label>Elementos Secundários:
+  <input id="elementos" placeholder="Ex.: pássaros, montanhas">
+</label>
+
+<label>Paleta de Cores:
+  <input id="cores" placeholder="Ex.: tons pastel, vibrantes">
+</label>
+
+<label>Tom Emocional:
+  <select id="tom">
+    <option>alegre</option>
+    <option>sombrio</option>
+    <option>sereno</option>
+    <option>dramático</option>
   </select>
+</label>
 
-  <label>Time Vencedor:</label>
-  <select id="timeV">
-    <option value="flamengo">Flamengo V</option>
-    <option value="palmeiras">Palmeiras V</option>
-    <option value="saopaulo">São Paulo V</option>
-    <option value="corinthians">Corinthians V</option>
-    <option value="vasco">Vasco V</option>
-    <option value="fluminense">Fluminense V</option>
-    <option value="mirassol">Mirassol V</option>
-    <option value="santos">Santos V</option>
-    <option value="gremio">Grêmio V</option>
-    <option value="internacional">Internacional V</option>
-    <option value="juventude">Juventude V</option>
-    <option value="atletico">Atlético V</option>
-    <option value="cruzeiro">Cruzeiro V</option>
-    <option value="botafogo">Botafogo V</option>
-    <option value="fortaleza">Fortaleza V</option>
-    <option value="ceara">Ceará V</option>
-    <option value="vitoria">Vitória V</option>
-    <option value="bahia">Bahia V</option>
-    <option value="bragantino">Bragantino V</option>
-    <option value="sport">Sport V</option>
+<label>Cor de Fundo:
+  <input type="color" id="fundo" value="#ffffff">
+</label>
+
+<label>Tipo de Iluminação:
+  <select id="iluminacao">
+    <option>natural</option>
+    <option>neon</option>
+    <option>pôr do sol</option>
+    <option>noturna</option>
   </select>
+</label>
 
-  <label>Time Perdedor:</label>
-  <select id="timeP">
-    <option value="flamengo">Flamengo P</option>
-    <option value="palmeiras">Palmeiras P</option>
-    <option value="saopaulo">São Paulo P</option>
-    <option value="corinthians">Corinthians P</option>
-    <option value="vasco">Vasco P</option>
-    <option value="fluminense">Fluminense P</option>
-    <option value="mirassol">Mirassol P</option>
-    <option value="santos">Santos P</option>
-    <option value="gremio">Grêmio P</option>
-    <option value="internacional">Internacional P</option>
-    <option value="juventude">Juventude P</option>
-    <option value="atletico">Atlético P</option>
-    <option value="cruzeiro">Cruzeiro P</option>
-    <option value="botafogo">Botafogo P</option>
-    <option value="fortaleza">Fortaleza P</option>
-    <option value="ceara">Ceará P</option>
-    <option value="vitoria">Vitória P</option>
-    <option value="bahia">Bahia P</option>
-    <option value="bragantino">Bragantino P</option>
-    <option value="sport">Sport P</option>
+<label>Textura:
+  <select id="textura">
+    <option>suave</option>
+    <option>áspera</option>
+    <option>metálica</option>
+    <option>aveludada</option>
   </select>
+</label>
 
-  <label>Seu nome/mensagem (até 30 caracteres):</label>
-  <input type="text" id="autor" maxlength="30">
+<label>Resolução:
+  <select id="resolucao">
+    <option>1024x1024</option>
+    <option>1920x1080</option>
+    <option>3840x2160</option>
+  </select>
+</label>
 
-  <button onclick="gerar()">Gerar Wallpaper</button>
-  <button onclick="download()">Baixar Imagem</button>
+<label>Texto Opcional:
+  <textarea id="texto" placeholder="Texto na imagem"></textarea>
+</label>
 
-  <div class="wallpaper" id="wallpaper">
-    <div class="setor" id="s1"></div>
-    <div class="setor" id="s2"></div>
-    <div class="setor" id="s3"></div>
-    <div class="setor" id="s4"></div>
-    <div class="setor" id="s5"></div>
-    <div class="setor" id="s6"></div>
-    <div class="setor" id="s7"></div>
-    <div class="setor" id="s8"></div>
-    <div class="setor rodape">
-      <img src="logo-streamdroid.png" alt="StreamDroid">
-      <span>Crie sua imagem: <a href="https://bit.ly/cria_wallpaper" style="color: #fff;">https://bit.ly/cria_wallpaper</a></span>
-    </div>
-    <div class="setor rodape">
-      <img src="logo-streamdroid.png" alt="StreamDroid">
-      <span>Crie sua imagem: <a href="https://bit.ly/cria_wallpaper" style="color: #fff;">https://bit.ly/cria_wallpaper</a></span>
-    </div>
-  </div>
-</div>
+<button onclick="gerarImagem()">Gerar Imagem</button>
 
-<div class="player-container" id="playerContainer">
-  <iframe src="https://iptv-org.github.io/iptv/player?stream-url=http://play.biturl.vip/get.php?username=Playmaster&password=e6fx7fmxp3l&type=m3u_plus&output=ts" allowfullscreen></iframe>
-</div>
+<div id="resultado"></div>
 
-<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<div class="historico" id="historico"></div>
 
 <script>
-  setTimeout(() => {
-    document.getElementById("splash").style.display = "none";
-    document.getElementById("generatorContainer").style.display = "flex";
-    document.getElementById("playerContainer").style.display = "block";
-  }, 5000);
+  const historico = [];
 
-  function gerar() {
-    const saudacao = document.getElementById('saudacao').value;
-    const timeV = document.getElementById('timeV').value;
-    const timeP = document.getElementById('timeP').value;
-    const autor = document.getElementById('autor').value;
-    const corFundo = document.getElementById('corFundo').value;
-
-    document.getElementById('wallpaper').style.background = `linear-gradient(to bottom, ${corFundo}, white)`;
-
-    document.getElementById('s1').innerHTML = `<div class='saudacao'>${saudacao}</div>`;
-    document.getElementById('s2').innerHTML = `<div class='saudacao'>${saudacao}</div>`;
-    document.getElementById('s3').innerHTML = `<img class='imagem-time' src='${timeV}.png'>`;
-    document.getElementById('s4').innerHTML = `<img class='imagem-time' src='${timeP}.png'>`;
-    document.getElementById('s5').innerHTML = `<img class='imagem-time' src='${timeV}.png'>`;
-    document.getElementById('s6').innerHTML = `<img class='imagem-time' src='${timeP}.png'>`;
-    document.getElementById('s7').innerHTML = `<img class='imagem-time' src='${timeV}.png'>`;
-    document.getElementById('s8').innerHTML = `<div class='autor'>${autor}</div>`;
+  function gerarPrompt() {
+    return `
+      Estilo ${estilo.value}, tema ${tema.value}, com elementos como ${elementos.value}.
+      Paleta de cores: ${cores.value}. Tom emocional: ${tom.value}.
+      Cor de fundo: ${fundo.value}. Iluminação: ${iluminacao.value}.
+      Textura: ${textura.value}. ${texto.value ? 'Texto: ' + texto.value : ''}
+    `.trim();
   }
 
-  function download() {
-    html2canvas(document.getElementById('wallpaper')).then(function(canvas) {
-      const link = document.createElement('a');
-      link.download = 'wallpaper.png';
-      link.href = canvas.toDataURL('image/png');
-      link.click();
-    });
+  async function gerarImagem() {
+    const prompt = gerarPrompt();
+    const [width, height] = resolucao.value.split('x');
+
+    const apiKey = 'SUA_API_KEY_AQUI';
+
+    document.getElementById('resultado').innerHTML = 'Gerando...';
+
+    try {
+      const response = await fetch('https://api.stability.ai/v2beta/stable-image/generate/core', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${apiKey}`,
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          prompt,
+          output_format: 'png',
+          model: 'stable-diffusion-xl-v1-0',
+          width: parseInt(width),
+          height: parseInt(height)
+        })
+      });
+
+      const blob = await response.blob();
+      const url = URL.createObjectURL(blob);
+
+      mostrarImagem(url);
+      salvarHistorico(url);
+    } catch (e) {
+      document.getElementById('resultado').innerHTML = 'Erro ao gerar imagem.';
+      console.error(e);
+    }
+  }
+
+  function mostrarImagem(url) {
+    document.getElementById('resultado').innerHTML = `
+      <img src="${url}">
+      <a href="${url}" download="wallpaper.png">
+        <button>Download</button>
+      </a>
+      <div class="compartilhar">
+        <button onclick="compartilhar('${url}')">Compartilhar</button>
+      </div>
+    `;
+  }
+
+  function salvarHistorico(url) {
+    historico.push(url);
+    const hDiv = document.getElementById('historico');
+    const img = document.createElement('img');
+    img.src = url;
+    img.onclick = () => mostrarImagem(url);
+    hDiv.appendChild(img);
+  }
+
+  function compartilhar(url) {
+    const texto = 'Veja o wallpaper que eu gerei!';
+    const encoded = encodeURIComponent(texto + ' ' + url);
+    const wpp = `https://wa.me/?text=${encoded}`;
+    const twitter = `https://twitter.com/intent/tweet?text=${encoded}`;
+
+    window.open(wpp, '_blank');
+    window.open(twitter, '_blank');
   }
 </script>
 
